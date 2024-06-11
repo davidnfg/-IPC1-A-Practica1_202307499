@@ -7,21 +7,51 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import static ventana.principal.code;
 
 /**
  *
  * @author Fabro
  */
 public class inicial extends JPanel{
+     private UsuarioLogic usuarioLogic = new UsuarioLogic();
+    private JTextField scode;
+    private JTable tabla;
+    public DefaultTableModel modelo;
+    public JTable tablaa;
+    private DefaultTableModel modeloTabla;
     public inicial (){
         // Establecer el tamaño preferido del panel
         setSize(800, 500);
         setBackground(Color.white);
         setLayout(null);
+        // Tabla
+        String[] columnNames = {"Código", "Nombre", "Chat", "Eliminar"};
+        modelo = new DefaultTableModel(columnNames, 0);
+        tablaa = new JTable(modelo) {
+            public boolean isCellEditable(int row, int column) {
+                return column == 2 || column == 3; // Habilitar edición solo para las columnas de botones
+            }
+        };
+        tablaa.getColumn("Chat").setCellRenderer(new ButtonRenderer());
+        tablaa.getColumn("Chat").setCellEditor(new ButtonEditor(new JCheckBox(), this));
+        tablaa.getColumn("Eliminar").setCellRenderer(new ButtonRenderer());
+        tablaa.getColumn("Eliminar").setCellEditor(new ButtonEditor(new JCheckBox(), this));
+
+        JScrollPane scrollPane = new JScrollPane(tablaa);
+        scrollPane.setBounds(50, 100, 500, 250);
+        add(scrollPane);
+        
         
         //Botones pestañas
         JButton Lista = new JButton("LISTA DE CONTACTOS");
@@ -89,6 +119,28 @@ public class inicial extends JPanel{
         JButton agregar = new JButton("AGREGAR");
         agregar.setBackground(Color.YELLOW);
         agregar.setBounds(575, 140, 150, 50);
+        // Acción del botón Agregar
+        agregar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = scode.getText();
+                int index = usuarioLogic.buscar(codigo);
+                if (index != -1) {
+                    Usuarios usuario = usuarioLogic.obtener(codigo);
+                    if (usuario != null) {
+                        Object[] row = new Object[4];
+                        row[0] = usuario.getCodigo();
+                        row[1] = usuario.getNombre() + " " + usuario.getApellido();
+                        row[2] = "Abrir";
+                        row[3] = "Eliminar";
+                        modelo.addRow(row);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+                }
+            }
+        });
+    
         
        
         JButton logout = new JButton("LOG OUT");
@@ -102,7 +154,7 @@ public class inicial extends JPanel{
             public void actionPerformed(ActionEvent e) {
                Ventana inicio = new Ventana();
                inicio.setVisible(true);
-        
+                //code +=1;
         }
         };
        logout.addActionListener(oyentlo);

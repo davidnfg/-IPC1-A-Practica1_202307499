@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import static ventana.principal.codigoStr;
+import static ventana.principal.code;
+
 
 
 /**
@@ -80,8 +81,8 @@ public class Editar_Perfil extends JPanel{
         codeJ.setFont(new Font("Arial", Font.BOLD, 16));
         codeJ.setBackground(Color.BLACK);
         codeJ.setBounds(50, 80, 150, 35);
-        
-        JTextField codeF = new JTextField(codigoStr);
+        //String codigoStr = Integer.toString(code);
+        JTextField codeF = new JTextField("20230000");
         codeF.setBounds(50, 120, 150, 35);
         codeF.setEditable(true);
         //
@@ -140,10 +141,11 @@ public class Editar_Perfil extends JPanel{
             public void actionPerformed(ActionEvent e) {
                if (!nameF.getText().isEmpty()&&!lastF.getText().isEmpty()
                 &&!passwF.getText().isEmpty()
-                &&!edadF.getText().isEmpty()&&!telF.getText().isEmpty()) {
+                &&!edadF.getText().isEmpty()&&!telF.getText().isEmpty()&&!telF.getText().isEmpty()) {
             
             Usuarios usuario = new Usuarios(codeF.getText(),nameF.getText(),lastF.getText(),edadF.getText(),
             telF.getText(),genF.getText(),passwF.getText());
+                   System.out.println("Mandando 3: "+code);
             if (UsuarioLogic.modificar(usuario)) {
                 JOptionPane.showMessageDialog(Editar_Perfil.this, "Usuario modificado correctamente.");
                 
@@ -158,8 +160,8 @@ public class Editar_Perfil extends JPanel{
     }
 });
             
-        
-        
+
+       
         
         
         add(Lista);

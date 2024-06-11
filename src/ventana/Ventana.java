@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.security.auth.spi.LoginModule;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.StyledEditorKit;
+import static ventana.principal.code;
 
 /**
  *
@@ -86,6 +88,7 @@ public class Ventana extends JFrame{
                     if(UsuarioLogic.autentificar(emailField.getText(), pwField.getText())){
                         JOptionPane.showMessageDialog(Ventana.this, "¡Bienvenido!");
                         inicial inicio = new inicial();
+                        System.out.println("mandando2"+code);
                         inicio.setSize(800, 500);
         inicio.setLocation(0, 0);
                 panel.removeAll();

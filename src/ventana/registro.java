@@ -7,11 +7,12 @@ import java.awt.event.ActionListener;
 import java.lang.reflect.GenericSignatureFormatError;
 import javax.security.auth.spi.LoginModule;
 import static ventana.principal.code;
-import static ventana.principal.codigoStr;
+
+;
 
 
 public class registro extends JPanel{
-   //static int code = 20230000;
+    //int code = 20230000;
    //String codigoStr = Integer.toString(code);
     
     
@@ -84,17 +85,18 @@ public class registro extends JPanel{
     public void actionPerformed(ActionEvent e) {
         
                 
-                
+        String codigoStr = Integer.toString(code);        
         if (!nameF.getText().isEmpty()&&!lastF.getText().isEmpty()
                 &&!passwF.getText().isEmpty()
                 &&!edadF.getText().isEmpty()&&!telF.getText().isEmpty()) {
             //String codigoStr = Integer.toString(code);
             String selectedGender = (String)genderComboBox.getSelectedItem();
             Usuarios usuario = new Usuarios(codigoStr,nameF.getText(),lastF.getText(),edadF.getText(),
-            telF.getText(),selectedGender,passwF.getText());
+            telF.getText(),selectedGender,passwF.getText()); 
             if (UsuarioLogic.insertar(usuario)) {
                 JOptionPane.showMessageDialog(registro.this, "USUARIO CREADO. TU CODIGO ES: "+code);
-                code +=1; 
+                System.out.println("mandado: "+code);
+                code +=1;
             Ventana login = new Ventana();
             login.setVisible(true);
             
@@ -114,7 +116,7 @@ public class registro extends JPanel{
         
         
         
-        
+         
         add(name);
         add(lastn);
         add(passw);
