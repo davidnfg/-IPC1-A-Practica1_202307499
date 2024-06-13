@@ -1,76 +1,52 @@
-
 package ventana;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-
-/**
- *
- * @author Fabro
- */
 public class UsuarioOB {
-    private List<Usuarios> usuario;
-    
-    public UsuarioOB(){
-        usuario = new ArrayList<>();
+    public static List<Usuarios> usuario = new ArrayList<>();
+
+    public boolean insertar(Usuarios nuevoUsuario) {
+        return usuario.add(nuevoUsuario);
     }
-    public int buscar(String codigo){
-        //int n = -1;
+
+    public boolean modificar(Usuarios usuarioModificado) {
         for (int i = 0; i < usuario.size(); i++) {
-            if(usuario.get(i).getCodigo().equals(codigo)){
-                return i;
-                
+            if (usuario.get(i).getCodigo().equals(usuarioModificado.getCodigo())) {
+                usuario.set(i, usuarioModificado);
+                return true;
             }
-            
         }
-        return -1;
-    }
-    public boolean insertar(Usuarios codigo){
-        if(buscar(codigo.getCodigo())==-1){
-            usuario.add(codigo);
-            return true;
-        }else{
-            return false;
-        }
-        
-    }
-      public boolean modificar(Usuarios usuario) {
-        int indice = buscar(usuario.getCodigo());
-        if (indice != -1) {
-            Usuarios usuarioAux = obtener(usuario.getCodigo());
-            usuarioAux.setContra(usuario.getContra());
-            usuarioAux.setNombre(usuario.getNombre());
-            usuarioAux.setApellido(usuario.getApellido());
-            usuarioAux.setEdad(usuario.getEdad());
-            usuarioAux.setTelefono(usuario.getTelefono());
-            usuarioAux.setGenero(usuario.getGenero());
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     public boolean eliminar(String codigo) {
-        int indice = buscar(codigo);
-        if (indice != -1) {
-            usuario.remove(indice); // Elimina el usuario en el índice encontrado
-            return true;
-        } else {
-            return false;
-        }
+        return usuario.removeIf(u -> u.getCodigo().equals(codigo));
     }
 
     public Usuarios obtener(String codigo) {
-        int indice = buscar(codigo);
-        if (indice != -1) {
-            return usuario.get(indice); // Devuelve el usuario en el índice encontrado
-        } else {
-            return null;
+        for (Usuarios u : usuario) {
+            if (u.getCodigo().equals(codigo)) {
+                return u;
+            }
         }
+        return null;
     }
 
+    public int buscar(String codigo) {
+        for (int i = 0; i < usuario.size(); i++) {
+            if (usuario.get(i).getCodigo().equals(codigo)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
+
+
+    
+    
+
     
     
 

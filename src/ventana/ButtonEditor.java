@@ -1,11 +1,13 @@
-
 package ventana;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 class ButtonEditor extends DefaultCellEditor {
     protected JButton button;
@@ -39,7 +41,19 @@ class ButtonEditor extends DefaultCellEditor {
             int selectedRow = frame.tablaa.getSelectedRow();
             if (label.equals("Abrir")) {
                 // Acción del botón "Abrir"
-                JOptionPane.showMessageDialog(button, "Chat con: " + frame.modelo.getValueAt(selectedRow, 1));
+                JLabel chat = new JLabel("CHAT CON: " + frame.modelo.getValueAt(selectedRow, 1));
+                chat.setBounds(50, 150, 300, 40);
+                chat.setFont(new Font("Arial", Font.BOLD, 16));
+                List<Message> chatMessages = new ArrayList<>(); // Cargar mensajes previos si existen
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        ChatWindow chatWindow = new ChatWindow("202300001", "202300002", chatMessages);
+                        chatWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        chatWindow.setVisible(true);
+                    }
+                });
+                //JOptionPane.showMessageDialog(button, "Chat con: " + frame.modelo.getValueAt(selectedRow, 1));
             } else if (label.equals("Eliminar")) {
                 // Acción del botón "Eliminar"
                 frame.modelo.removeRow(selectedRow);
@@ -60,4 +74,3 @@ class ButtonEditor extends DefaultCellEditor {
         super.fireEditingStopped();
     }
 }  
-

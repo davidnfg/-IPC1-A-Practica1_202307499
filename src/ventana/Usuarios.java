@@ -1,11 +1,16 @@
 
 package ventana;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Fabro
  */
 public class Usuarios {
+
+    
     private String codigo;
     private String nombre;
     private String apellido;
@@ -13,6 +18,8 @@ public class Usuarios {
     private String telefono;
     private String genero;
     private String contra;
+    
+
 
     public Usuarios(String codigo, String nombre, String apellido, String edad, String telefono, String genero, String contra) {
         this.codigo = codigo;
@@ -22,7 +29,11 @@ public class Usuarios {
         this.telefono = telefono;
         this.genero = genero;
         this.contra = contra;
+        
+        
     }
+    
+  
 
     public String getContra() {
         return contra;
@@ -81,5 +92,12 @@ public class Usuarios {
     }
     
     
+   
+    }
+
+
     
-}
+
+
+    
+

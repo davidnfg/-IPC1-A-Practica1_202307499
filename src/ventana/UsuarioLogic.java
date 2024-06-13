@@ -1,55 +1,47 @@
-
 package ventana;
 
-/**
- *
- * @author Fabro
- */
 public class UsuarioLogic {
-    private static UsuarioOB usuarioOB = new UsuarioOB();
-    public static int buscar(String codigo){
-        return usuarioOB.buscar(codigo);
+    static UsuarioOB usuarioOB = new UsuarioOB();
+    static admin adminPanel; // Referencia al panel de admin
+
+    public static void setAdminPanel(admin panel) {
+        adminPanel = panel;
     }
-    
-    public static boolean autentificar(String codigo, String contra){
-        if(obtener(codigo)!=null){
-            Usuarios usuarioconsulta = obtener(codigo);
-            if (usuarioconsulta.getCodigo().equals(codigo)&&usuarioconsulta.getContra().equals(contra)) {
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
+
+    public static boolean insertar(Usuarios nuevoUsuario) {
+        boolean resultado = usuarioOB.insertar(nuevoUsuario);
+        if (resultado && adminPanel != null) {
+            adminPanel.actualizarTablaUsuarios();
         }
+        return resultado;
     }
-  
-    public static boolean insertar(Usuarios codigo){
-        return usuarioOB.insertar(codigo);
-        
+
+    public static boolean modificar(Usuarios usuarioModificado) {
+        boolean resultado = usuarioOB.modificar(usuarioModificado);
+        if (resultado && adminPanel != null) {
+            adminPanel.actualizarTablaUsuarios();
+        }
+        return resultado;
     }
-    public static boolean modificar(Usuarios usuarios){
-        return usuarioOB.modificar(usuarios);
+
+    public static boolean eliminar(String codigo) {
+        boolean resultado = usuarioOB.eliminar(codigo);
+        if (resultado && adminPanel != null) {
+            adminPanel.actualizarTablaUsuarios();
+        }
+        return resultado;
     }
-    public static Usuarios obtener(String codigo){
+
+    public static Usuarios obtener(String codigo) {
         return usuarioOB.obtener(codigo);
     }
-    public static boolean eliminar(String codigo){
-        return usuarioOB.eliminar(codigo);
+
+    public static int buscar(String codigo) {
+        return usuarioOB.buscar(codigo);
     }
-    public static boolean agregarAMIGO(String codigo){
-        if(obtener(codigo)!=null){
-            Usuarios usuarioconsulta = obtener(codigo);
-            if (usuarioconsulta.getCodigo().equals(codigo)) {
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            return false;
-        }
+
+    public static boolean autentificar(String codigo, String contra) {
+        Usuarios usuario = obtener(codigo);
+        return usuario != null && usuario.getCodigo().equals(codigo) && usuario.getContra().equals(contra);
     }
-    
-    
-    
 }

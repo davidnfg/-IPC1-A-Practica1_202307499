@@ -1,24 +1,29 @@
+
+
 package ventana;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.GenericSignatureFormatError;
-import javax.security.auth.spi.LoginModule;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import static ventana.principal.code;
 
-;
-
-
-public class registro extends JPanel{
-    //int code = 20230000;
-   //String codigoStr = Integer.toString(code);
-    
-    
-    
-    public registro() {
-        
+/**
+ *
+ * @author Fabro
+ */
+public class regis2 extends JPanel{
+    public regis2(){
         // Establecer el tamaño preferido del panel
         setPreferredSize(new Dimension(800, 500));
         setBackground(Color.WHITE);
@@ -88,6 +93,7 @@ public class registro extends JPanel{
        
         JButton sing = new JButton();
         sing.setFont(new Font("Arial", Font.BOLD, 18));
+        
         sing.setForeground(Color.WHITE);
         sing.setBackground(Color.BLACK);
         sing.setBounds(300, 300, 200, 60);
@@ -107,16 +113,23 @@ public class registro extends JPanel{
             Usuarios usuario = new Usuarios(codigoStr,nameF.getText(),lastF.getText(),edadF.getText(),
             telF.getText(),selectedGender,password); 
             if (UsuarioLogic.insertar(usuario)) {
-                JOptionPane.showMessageDialog(registro.this, "USUARIO CREADO.\nTU CODIGO ES: "+code);
+                JOptionPane.showMessageDialog(regis2.this, "USUARIO CREADO");
                 System.out.println("mandado: "+code);
                 code +=1;
-            Ventana login = new Ventana();
-            login.setVisible(true);
+            admin in = new admin();
+                
+        
+        in.setSize(800, 500);
+        in.setLocation(0, 0);
+                removeAll();
+                add(in,BorderLayout.CENTER);
+                revalidate();
+                repaint();
             
           
             }else{
                 
-                JOptionPane.showMessageDialog(registro.this, "Usuario ya existente" );
+                JOptionPane.showMessageDialog(regis2.this, "Usuario ya existente" );
                 
             }
             
@@ -144,11 +157,9 @@ public class registro extends JPanel{
         add(passwF);
         add(sing);
         //add(genderComboBox);
-        
+       
           //add(genF);
           add(genderComboBox);
-        
     }
-
     
 }

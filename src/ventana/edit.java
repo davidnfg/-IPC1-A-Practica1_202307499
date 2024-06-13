@@ -1,4 +1,5 @@
 
+
 package ventana;
 
 import java.awt.BorderLayout;
@@ -14,68 +15,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static ventana.principal.code;
 
-
-
 /**
  *
  * @author Fabro
  */
-public class Editar_Perfil extends JPanel{
-    
-    public Editar_Perfil(){
-        
-        // Establecer el tamaño preferido del panel
+public class edit extends JPanel{
+    public edit(){
+         // Establecer el tamaño preferido del panel
         setPreferredSize(new Dimension(800, 500));
         setBackground(Color.WHITE);
         setLayout(null);
-        //Botones de pestañas
-        JButton Lista = new JButton("LISTA DE CONTACTOS");
-        Lista.setFont(new Font("Arial", Font.BOLD, 12));
-        Lista.setBackground(Color.ORANGE);
-        Lista.setBounds(50, 20, 200, 35);
-         ActionListener oyenteIN = new ActionListener() {
         
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                inicial in = new inicial();
-                
-        
-        in.setSize(800, 500);
-        in.setLocation(0, 0);
-                removeAll();
-                add(in,BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        };
-        Lista.addActionListener(oyenteIN);
-        
-        
-        JButton notis = new JButton("NOTIFICACIONES");
-        notis.setFont(new Font("Arial", Font.BOLD, 12));
-        notis.setBackground(Color.ORANGE);
-        notis.setBounds(250, 20, 150, 35);
-        ActionListener oyentNT = new ActionListener() {
-        
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notificaciones nt = new notificaciones();
-                
-        
-        nt.setSize(800, 500);
-        nt.setLocation(0, 0);
-                removeAll();
-                add(nt,BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        };
-        notis.addActionListener(oyentNT);
-        
-        JButton ep = new JButton("EDITAR PERFIL");
-        ep.setFont(new Font("Arial", Font.BOLD, 12));
-        ep.setBackground(Color.ORANGE);
-        ep.setBounds(400, 20, 150, 35);
         
         JLabel codeJ = new JLabel("Codigo:");
         codeJ.setFont(new Font("Arial", Font.BOLD, 16));
@@ -147,11 +97,21 @@ public class Editar_Perfil extends JPanel{
             telF.getText(),genF.getText(),passwF.getText());
                    System.out.println("Mandando 3: "+code);
             if (UsuarioLogic.modificar(usuario)) {
-                JOptionPane.showMessageDialog(Editar_Perfil.this, "Usuario modificado correctamente.");
+                
+                JOptionPane.showMessageDialog(edit.this, "Usuario modificado correctamente.");
+                admin in = new admin();
+                
+        
+        in.setSize(800, 500);
+        in.setLocation(0, 0);
+                removeAll();
+                add(in,BorderLayout.CENTER);
+                revalidate();
+                repaint();
                 
          
             }else{
-                JOptionPane.showMessageDialog(Editar_Perfil.this, "Usuario no encontrado" );
+                JOptionPane.showMessageDialog(edit.this, "Usuario no encontrado" );
             }
             
         }
@@ -163,10 +123,8 @@ public class Editar_Perfil extends JPanel{
 
        
         
-        
-        add(Lista);
-        add(notis);
-        add(ep);
+
+     
         add(codeJ);
         add(codeF);
         add(nameJ);
@@ -185,3 +143,5 @@ public class Editar_Perfil extends JPanel{
     }
     
 }
+    
+
